@@ -47,8 +47,10 @@ const Footer = () => {
           <div>
             <h4 className='text-3xl font-medium mb-4'>Subscribe Us</h4>
             <form onSubmit={handleSubscribe}>
-              <input className='input w-full border-gray-300 mb-4' type="email" name="email" id="email" placeholder='Enter email address' required />
-              <input className='btn btn-primary' type="submit" value="Subscribe" />
+              <input className='input w-full max-w-[500px] border-gray-300 mb-4' type="email" name="email" id="email" placeholder='Enter email address' required />
+              <div>
+                <input className='btn btn-primary' type="submit" value="Subscribe" />
+              </div>
             </form>
           </div>
         </div>

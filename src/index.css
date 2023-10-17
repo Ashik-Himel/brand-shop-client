@@ -4,9 +4,12 @@
 
 @layer utilities {
   .btn {
-    @apply text-base normal-case h-auto min-h-[42px];
+    @apply text-base normal-case h-auto min-h-[42px] border-2;
   }
   .btn-primary {
     @apply text-white;
+  }
+  .btn-outline {
+    @apply border-primary text-primary hover:bg-primary hover:text-white;
   }
 }
