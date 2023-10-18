@@ -7,7 +7,7 @@ const Footer = () => {
   const handleSubscribe = e => {
     e.preventDefault();
 
-    const newSubscriber = {subscriber: e.target.email.value};
+    const newSubscriber = {subscriber: e.target.subscribe.value};
 
     fetch('https://brand-shop-server.vercel.app/subscribers', {
       method: "POST",
@@ -33,7 +33,7 @@ const Footer = () => {
         }
       })
       .catch(error => {
-        toast.success(error.message, {
+        toast.error(error.code, {
           position: "top-center",
           autoClose: 3000,
           hideProgressBar: false,
@@ -74,7 +74,7 @@ const Footer = () => {
           <div>
             <h4 className='text-3xl font-medium mb-4'>Subscribe Us</h4>
             <form onSubmit={handleSubscribe}>
-              <input className='input w-full max-w-[500px] border-gray-300 mb-4' type="email" name="email" id="email" placeholder='Enter email address' required />
+              <input className='input w-full max-w-[500px] border-gray-300 mb-4' type="email" name="subscribe" id="subscribe" placeholder='Enter email address' required />
               <div>
                 <input className='btn btn-primary' type="submit" value="Subscribe" />
               </div>

@@ -1,21 +1,68 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import { UserContext } from "../ContextProvider";
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const ProductDetails = () => {
-  const {name, image, category, price, shortDescription} = useLoaderData();
+  const {name, slug, image, category, price, shortDescription} = useLoaderData();
   const [categoryImg, setCategoryImg] = useState({});
+  const [cartData, setCartData] = useState([[]]);
+  const {user} = useContext(UserContext);
+  const email = user?.email;
+  const navigate = useNavigate();
+
   useEffect(() => {
     fetch(`https://brand-shop-server.vercel.app/categories/${category}`)
       .then(res => res.json())
-      .then(data => setCategoryImg(data?.image))
-  }, [category])
+      .then(data => setCategoryImg(data?.image));
+    fetch(`http://localhost:5001/users/${email}`)
+      .then(res => res.json())
+      .then(data => setCartData(data?.userCart || [[]]))
+  }, [category, email])
 
   const handleAddToCart = e => {
     e.preventDefault();
 
     const quantity = e.target.quantity.value;
-    console.log(quantity);
+    if (!cartData.flat().includes(slug)) {
+      setCartData([...cartData, [slug, quantity]]);
+      const updatedCart = {email, userCart: cartData};
+
+      fetch(`http://localhost:5001/users/${email}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify(updatedCart)
+      })
+        .then(res => res.json())
+        .then(() => {
+          toast.success('Added to cart !!!', {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          navigate('/cart');
+        })
+    } else {
+      toast.success('Already exist in cart !!!', {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
   }
 
   return (
@@ -33,7 +80,7 @@ const ProductDetails = () => {
             <div>
               <img className="w-10 mb-4" src={categoryImg} alt="Category Image" />
               <h2 className="text-3xl font-medium mb-1">{name}</h2>
-              <span className="text-xl block mb-6">&#2547; {price} Taka</span>
+              <span className="text-xl block mb-6">&#2547; {Number(price).toLocaleString()} Taka</span>
               <p className="text-gray-500 mb-8">{shortDescription}</p>
               <form onSubmit={handleAddToCart} className="flex gap-4">
                 <input className="input h-[42px] w-20" type="number" name="quantity" id="quantity" defaultValue='1' required />
@@ -43,6 +90,19 @@ const ProductDetails = () => {
           </div>
         </div>
       </section>
+
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </main>
   );
 };

@@ -1,8 +1,11 @@
 import { Helmet } from "react-helmet-async";
+import { useLoaderData } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
 const AddProduct = () => {
+  const categories = useLoaderData();
+
   const handleAdd = e => {
     e.preventDefault();
 
@@ -25,7 +28,6 @@ const AddProduct = () => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         if (data.insertedId) {
           toast.success('Product Added Successfully !!!', {
             position: "top-center",
@@ -41,7 +43,7 @@ const AddProduct = () => {
         }
       })
       .catch(error => {
-        toast.error(error.message, {
+        toast.error(error.code, {
           position: "top-center",
           autoClose: 3000,
           hideProgressBar: false,
@@ -87,15 +89,9 @@ const AddProduct = () => {
                 <div className="flex-1">
                   <label className="block font-medium mb-2" htmlFor="category">Category</label>
                   <select className="select w-full border-gray-300" name="category" id="category" required>
-                    <option value="Apple">Apple</option>
-                    <option value="Samsung">Samsung</option>
-                    <option value="Oneplus">Oneplus</option>
-                    <option value="HP">HP</option>
-                    <option value="Lenevo">Lenevo</option>
-                    <option value="Asus">Asus</option>
-                    <option value="Canon">Canon</option>
-                    <option value="Nikon">Nikon</option>
-                    <option value="Sony">Sony</option>
+                    {
+                      categories.map(category => <option key={category._id} value={category?.name}>{category?.name}</option>)
+                    }
                   </select>
                 </div>
               </div>

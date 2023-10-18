@@ -23,7 +23,8 @@ export const router = createBrowserRouter([
       },
       {
         path: '/add',
-        element: <PrivateRoute><AddProduct /></PrivateRoute>
+        element: <PrivateRoute><AddProduct /></PrivateRoute>,
+        loader: () => fetch("https://brand-shop-server.vercel.app/categories")
       },
       {
         path: '/cart',
@@ -49,7 +50,7 @@ export const router = createBrowserRouter([
             banners = await res2.json();
           }
           catch(error) {
-            console.log(error);
+            console.error(error);
           }
           return {products, banners};
         }

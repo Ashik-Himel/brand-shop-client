@@ -18,10 +18,10 @@
 }
 
 swiper-container::part(button-prev) {
-  @apply text-white bg-black py-2 px-3 rounded-md;
+  @apply text-white bg-black py-2 px-3 rounded-md w-2 h-6;
 }
 swiper-container::part(button-next) {
-  @apply text-white bg-black py-2 px-3 rounded-md;
+  @apply text-white bg-black py-2 px-3 rounded-md w-2 h-6;
 }
 swiper-container::part(bullet) {
   @apply bg-white

@@ -26,8 +26,8 @@ const ProductCard = ({product}) => {
         </div>
         <span className='block text-gray-500 text-xl mb-4'><span className='text-black font-medium'>Price:</span> {Number(price).toLocaleString("en-US")} Taka</span>
         <div className='flex flex-wrap items-center gap-4'>
-          <Link to={`/products/${slug}`} className='btn btn-primary'>Details</Link>
-          <Link className='btn btn-secondary'>Update</Link>
+          <Link to={`/products/${slug}`} className='btn btn-primary' onClick={() => scrollTo(0, 0)}>Details</Link>
+          <Link className='btn btn-secondary' onClick={() => scrollTo(0, 0)}>Update</Link>
         </div>
       </div>
     </div>
