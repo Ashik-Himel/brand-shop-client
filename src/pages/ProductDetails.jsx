@@ -17,7 +17,7 @@ const ProductDetails = () => {
     fetch(`https://brand-shop-server.vercel.app/categories/${category}`)
       .then(res => res.json())
       .then(data => setCategoryImg(data?.image));
-    fetch(`http://localhost:5001/users/${email}`)
+    fetch(`https://brand-shop-server.vercel.app/users/${email}`)
       .then(res => res.json())
       .then(data => setCartData(data?.userCart || [[]]))
   }, [category, email])
@@ -30,7 +30,7 @@ const ProductDetails = () => {
       setCartData([...cartData, [slug, quantity]]);
       const updatedCart = {email, userCart: cartData};
 
-      fetch(`http://localhost:5001/users/${email}`, {
+      fetch(`https://brand-shop-server.vercel.app/users/${email}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json"
@@ -78,7 +78,7 @@ const ProductDetails = () => {
               <img className="max-h-[400px]" src={image} alt={name} />
             </div>
             <div>
-              <img className="w-10 mb-4" src={categoryImg} alt="Category Image" />
+              <img className="max-h-10 mb-4" src={categoryImg} alt="Category Image" />
               <h2 className="text-3xl font-medium mb-1">{name}</h2>
               <span className="text-xl block mb-6">&#2547; {Number(price).toLocaleString()} Taka</span>
               <p className="text-gray-500 mb-8">{shortDescription}</p>

@@ -9,7 +9,7 @@ const MyCart = () => {
   const email = user?.email;
 
   useEffect(() => {
-    fetch(`http://localhost:5001/users/${email}`)
+    fetch(`https://brand-shop-server.vercel.app/users/${email}`)
       .then(res => res.json())
       .then(data => {
         setCartProducts(data.userCart);

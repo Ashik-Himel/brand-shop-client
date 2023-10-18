@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const CartCard = ({slug, quantity}) => {
   const [product, setProduct] = useState({});
   useEffect(() => {
-    fetch(`http://localhost:5001/products/${slug}`)
+    fetch(`https://brand-shop-server.vercel.app/products/${slug}`)
       .then(res => res.json())
       .then(data => setProduct(data))
   }, [slug]);

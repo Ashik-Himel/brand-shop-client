@@ -10,6 +10,7 @@ import PrivateRoute from "./pages/PrivateRoute";
 import Register from "./pages/Register";
 import BrandProducts from "./pages/BrandProducts";
 import ProductDetails from "./pages/ProductDetails";
+import UpdateProduct from "./pages/UpdateProduct";
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +59,11 @@ export const router = createBrowserRouter([
       {
         path: '/products/:slug',
         element: <PrivateRoute><ProductDetails /></PrivateRoute>,
+        loader: ({params}) => fetch(`https://brand-shop-server.vercel.app/products/${params.slug}`)
+      },
+      {
+        path: '/update/:slug',
+        element: <PrivateRoute><UpdateProduct /></PrivateRoute>,
         loader: ({params}) => fetch(`https://brand-shop-server.vercel.app/products/${params.slug}`)
       }
     ]
