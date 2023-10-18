@@ -8,6 +8,7 @@ import PrivateRouteAlt from "./pages/PrivateRouteAlt";
 import Login from "./pages/Login";
 import PrivateRoute from "./pages/PrivateRoute";
 import Register from "./pages/Register";
+import BrandProducts from "./pages/BrandProducts";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,17 @@ export const router = createBrowserRouter([
       {
         path: '/register',
         element: <PrivateRouteAlt><Register /></PrivateRouteAlt>
+      },
+      {
+        path: '/products/categories/:category',
+        element: <BrandProducts />,
+        loader: async({params}) => {
+          const res = await fetch(`https://brand-shop-server.vercel.app/products/categories/${params.category}`);
+          const products = await res.json();
+          const res2 = await fetch(`https://brand-shop-server.vercel.app/banners/${params.category}`);
+          const banners = await res2.json();
+          return {products, banners};
+        }
       }
     ]
   }

@@ -6,17 +6,44 @@ import "react-toastify/dist/ReactToastify.css";
 const Footer = () => {
   const handleSubscribe = e => {
     e.preventDefault();
-    toast.success('Subscribed Successfully !!!', {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    });
-    e.target.reset();
+
+    const newSubscriber = {subscriber: e.target.email.value};
+
+    fetch('https://brand-shop-server.vercel.app/subscribers', {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify(newSubscriber)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.insertedId) {
+          toast.success('Subscribed Successfully !!!', {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          e.target.reset();
+        }
+      })
+      .catch(error => {
+        toast.success(error.message, {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      })
   }
 
   return (

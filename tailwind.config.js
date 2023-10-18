@@ -20,7 +20,8 @@ export default {
       {
         light: {
           ...require("daisyui/src/theming/themes")["[data-theme=light]"],
-          "primary": "#ff3f34"
+          "primary": "#ff3f34",
+          "secondary": "#1abc9c"
         }
       }
     ]

@@ -15,7 +15,7 @@ const CategoriesSection = () => {
       <div className="container">
         <Marquee className="py-6" pauseOnHover>
           {
-            categories.map(category => <Link className="flex flex-col justify-center items-center gap-2 p-8 cursor-pointer" key={category?._id}>
+            categories.map(category => <Link to={`/products/categories/${category.name}`} className="flex flex-col justify-center items-center gap-2 p-8 cursor-pointer" key={category?._id}>
               <img className="h-[40px] block" src={category?.image} alt={category?.name} />
               <h4 className="text-black text-2xl">{category?.name}</h4>
             </Link>)

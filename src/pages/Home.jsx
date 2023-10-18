@@ -3,7 +3,7 @@ import CategoriesSection from "../components/CategoriesSection";
 
 const Home = () => {
   return (
-    <main className="mb-16">
+    <main className="mb-12">
       <Helmet>
         <title>Brand Shop - Gadget and Accessories Seller</title>
       </Helmet>

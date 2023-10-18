@@ -4,12 +4,28 @@
 
 @layer utilities {
   .btn {
-    @apply text-base normal-case h-auto min-h-[42px] border-2;
+    @apply text-base normal-case h-auto min-h-[42px] border-2 rounded-md;
   }
   .btn-primary {
+    @apply text-white;
+  }
+  .btn-secondary {
     @apply text-white;
   }
   .btn-outline {
     @apply border-primary text-primary hover:bg-primary hover:text-white;
   }
+}
+
+swiper-container::part(button-prev) {
+  @apply text-white bg-black py-2 px-3 rounded-md;
+}
+swiper-container::part(button-next) {
+  @apply text-white bg-black py-2 px-3 rounded-md;
+}
+swiper-container::part(bullet) {
+  @apply bg-white
+}
+swiper-container::part(bullet-active) {
+  @apply bg-white
 }
