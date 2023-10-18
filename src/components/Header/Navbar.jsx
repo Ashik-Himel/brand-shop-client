@@ -29,7 +29,7 @@ const Navbar = () => {
         </li>
       </ul>
 
-      <div className="sm:hidden border-2 px-4 py-3 rounded-md text-[18px] cursor-pointer" onClick={() => setDrawerShow(!drawerShow)}>
+      <div className="sm:hidden border px-4 py-3 rounded-md text-[18px] cursor-pointer" onClick={() => setDrawerShow(!drawerShow)}>
         <AiOutlineMenu />
       </div>
     </nav>

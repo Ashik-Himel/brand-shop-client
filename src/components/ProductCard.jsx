@@ -3,7 +3,7 @@ import { BsStarFill, BsStar } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
 const ProductCard = ({product}) => {
-  const {name, image, type, category, rating, price} = product;
+  const {name, slug, image, type, category, rating, price} = product;
   const ratingTrack = [];
   for(let i = 1; i <= 5; i++) {
     if (i <= Math.round(rating)) ratingTrack.push(i);
@@ -26,7 +26,7 @@ const ProductCard = ({product}) => {
         </div>
         <span className='block text-gray-500 text-xl mb-4'><span className='text-black font-medium'>Price:</span> {Number(price).toLocaleString("en-US")} Taka</span>
         <div className='flex flex-wrap items-center gap-4'>
-          <Link className='btn btn-primary'>Details</Link>
+          <Link to={`/products/${slug}`} className='btn btn-primary'>Details</Link>
           <Link className='btn btn-secondary'>Update</Link>
         </div>
       </div>

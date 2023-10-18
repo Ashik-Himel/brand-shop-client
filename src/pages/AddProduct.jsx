@@ -7,13 +7,14 @@ const AddProduct = () => {
     e.preventDefault();
 
     const name = e.target.name.value;
+    const slug = name.trim().replaceAll(' ', '-').toLowerCase();
     const image = e.target.image.value;
     const type = e.target.type.value;
     const category = e.target.category.value;
     const price = e.target.price.value;
     const rating = e.target.rating.value;
     const shortDescription = e.target['short-description'].value;
-    const newProduct = {name, image, type, category, price, rating, shortDescription};
+    const newProduct = {name, slug, image, type, category, price, rating, shortDescription};
 
     fetch('https://brand-shop-server.vercel.app/products', {
       method: "POST",
