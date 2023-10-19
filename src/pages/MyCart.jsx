@@ -12,6 +12,7 @@ const MyCart = () => {
       .then(res => res.json())
       .then(data => setCartProducts(data))
   }, [user]);
+  console.log(cartProducts);
 
   return (
     <main className="py-12 min-h-[calc(100vh-396px)]">
@@ -25,12 +26,12 @@ const MyCart = () => {
             <h2 className="text-3xl font-medium text-center mb-8 dark:text-white">My Cart</h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {
-                cartProducts?.map(product => <CartCard key={product[0]} item={product} />)
+                cartProducts?.map(product => <CartCard key={product._id} product={product} cartProducts={cartProducts} setCartProducts={setCartProducts} />)
               }
             </div>
           </div>
         </section> : <section>
-          <div className="container py-8">
+          <div className="container">
             <img className="w-32 mx-auto" src="/favicon.png" alt="Icon" />
             <h2 className="text-3xl font-medium mt-4 text-center">Your cart is empty !!!</h2>
           </div>

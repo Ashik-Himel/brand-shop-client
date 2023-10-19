@@ -6,21 +6,18 @@ const Footer = () => {
   const handleSubscribe = e => {
     e.preventDefault();
 
-    const newSubscriber = {subscriber: e.target.subscribe.value};
-
-    fetch('https://brand-shop-server.vercel.app/subscribers', {
-      method: "POST",
+    const subscriber = e.target.subscribe.value;
+    fetch(`https://brand-shop-server.vercel.app/subscribers/${subscriber}`, {
+      method: "PUT",
       headers: {
         "content-type": "application/json"
       },
-      body: JSON.stringify(newSubscriber)
+      body: JSON.stringify({subscriber})
     })
       .then(res => res.json())
-      .then(data => {
-        if (data.insertedId) {
-          toast.success('Successfully Subscribed !!!');
+      .then(() => {
+        toast.success('Successfully Subscribed !!!');
           e.target.reset();
-        }
       })
       .catch(error => {
         toast.error(error.code);
