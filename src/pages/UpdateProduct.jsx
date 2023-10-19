@@ -26,7 +26,7 @@ const UpdateProduct = () => {
     const shortDescription = e.target['short-description'].value;
     const updateProduct = {name, slug, image, type, category, price, rating, shortDescription};
 
-    fetch(`http://localhost:5001/products/${oldSlug}`, {
+    fetch(`https://brand-shop-server.vercel.app/products/${oldSlug}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json"
