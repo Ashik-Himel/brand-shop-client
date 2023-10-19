@@ -73,7 +73,7 @@ const ProductDetails = () => {
       
       <section>
         <div className="container">
-          <div className="flex flex-col md:flex-row [&>*]:flex-1 justify-center items-center gap-6 bg-primary bg-opacity-10 p-8 rounded-lg">
+          <div className="flex flex-col md:flex-row [&>*]:flex-1 justify-center items-center gap-6 bg-primary bg-opacity-10 dark:bg-secondary dark:bg-opacity-10 dark:text-white p-8 rounded-lg">
             <div className="max-w-[500px] p-4 md:p-10 lg:p-16">
               <img className="max-h-[400px]" src={image} alt={name} />
             </div>
@@ -81,7 +81,7 @@ const ProductDetails = () => {
               <img className="max-h-10 mb-4" src={categoryImg} alt="Category Image" />
               <h2 className="text-3xl font-medium mb-1">{name}</h2>
               <span className="text-xl block mb-6">&#2547; {Number(price).toLocaleString()} Taka</span>
-              <p className="text-gray-500 mb-8">{shortDescription}</p>
+              <p className="text-gray-500 dark:text-gray-300 mb-8">{shortDescription}</p>
               <form onSubmit={handleAddToCart} className="flex gap-4">
                 <input className="input h-[42px] w-20" type="number" name="quantity" id="quantity" defaultValue='1' required />
                 <button className="btn btn-primary" type="submit">Add to Cart</button>

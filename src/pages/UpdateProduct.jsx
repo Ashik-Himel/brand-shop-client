@@ -73,7 +73,7 @@ const UpdateProduct = () => {
       
       <section>
         <div className="container">
-          <div className="bg-primary bg-opacity-10 p-6 rounded-md max-w-[900px] mx-auto">
+          <div className="bg-primary bg-opacity-10 dark:bg-secondary dark:bg-opacity-10 dark:text-white p-6 rounded-md max-w-[900px] mx-auto">
             <h2 className="text-3xl font-medium text-center mb-6">Update Product</h2>
             <form className="space-y-4" onSubmit={handleUpdate}>
               <div className="flex flex-col md:flex-row gap-4 md:gap-6">

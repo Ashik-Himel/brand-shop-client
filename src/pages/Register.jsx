@@ -153,7 +153,7 @@ const Register = () => {
       
       <section>
         <div className="container">
-          <div className="bg-primary bg-opacity-10 p-6 rounded-md max-w-[600px] mx-auto">
+          <div className="bg-primary bg-opacity-10 dark:bg-secondary dark:bg-opacity-10 dark:text-white p-6 rounded-md max-w-[600px] mx-auto">
             <h2 className="text-3xl font-medium text-center mb-6">Register</h2>
             <form onSubmit={handleRegister}>
               <div className="flex flex-col md:flex-row justify-center items-center gap-4 mb-4">
@@ -185,7 +185,7 @@ const Register = () => {
               </div>
 
               <p className="text-red-600 font-medium mt-2">{errorMsg}</p>
-              <input className="btn btn-primary btn-block mt-4" type="submit" value="Register" disabled={submitDisabled ? 'disabled' : ''} />
+              <input className="btn btn-primary btn-block mt-4 dark:disabled:bg-primary dark:disabled:text-white dark:disabled:bg-opacity-20" type="submit" value="Register" disabled={submitDisabled ? 'disabled' : ''} />
             </form>
 
             <p className="font-medium mt-4">Already have an account? <Link to='/login' className="text-primary" onClick={() => scrollTo(0, 0)}>Login</Link> here.</p>

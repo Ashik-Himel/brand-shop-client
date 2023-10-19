@@ -8,6 +8,13 @@ export const UserContext = createContext(null);
 const ContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loadedUser, setLoadedUser] = useState(false);
+  const [darkTheme, setDarkTheme] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem('darkMode') === "1") {
+      setDarkTheme(true);
+    }
+  }, [])
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
@@ -21,6 +28,8 @@ const ContextProvider = ({ children }) => {
     user,
     setUser,
     loadedUser,
+    darkTheme,
+    setDarkTheme
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

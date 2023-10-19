@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AiOutlineMenu } from 'react-icons/ai';
 import { FaCircleXmark } from 'react-icons/fa6';
+import { BsFillSunFill, BsFillMoonFill } from "react-icons/bs";
 import { UserContext } from "../../ContextProvider";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase.config";
@@ -11,7 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 const Navbar = () => {
   const [drawerShow, setDrawerShow] = useState(false);
   const [profileShow, setProfileShow] = useState(false);
-  const {loadedUser, user} = useContext(UserContext);
+  const {loadedUser, user, darkTheme, setDarkTheme} = useContext(UserContext);
 
   const handleLogout = () => {
     signOut(auth)
@@ -62,14 +63,14 @@ const Navbar = () => {
             <NavLink to='/cart' className={({isActive}) => isActive ? 'font-bold border-b-2 text-primary border-primary' : ''} onClick={() => setDrawerShow(!drawerShow)}>My Cart</NavLink>
           </li>
         </ul>
-        <div className="flex gap-4 relative">
+        <div className="flex items-center gap-4 relative">
           {
             loadedUser ? user ? <div className="flex justify-center items-center gap-4 cursor-pointer select-none" onClick={() => setProfileShow(!profileShow)}>
               <img className="w-10 rounded-full" src={user?.photoURL} alt="User" />
               <span className="hidden lg:block">{user?.displayName?.split(" ")[0]}</span>
             </div> : <Link to='/login' className="btn btn-primary" onClick={() => scrollTo(0, 0)}>Login</Link> : <span className="loading loading-spinner px-4"></span>
           }
-          <div className="sm:hidden border px-3 rounded-md cursor-pointer flex justify-center items-center" onClick={() => setDrawerShow(!drawerShow)}>
+          <div className="sm:hidden border p-3 rounded-md cursor-pointer flex justify-center items-center" onClick={() => setDrawerShow(!drawerShow)}>
             <AiOutlineMenu />
           </div>
           {
@@ -84,6 +85,18 @@ const Navbar = () => {
               }}>Logout</button>
             </div>
           }
+          <div className="select-none text-2xl text-primary cursor-pointer" onClick={() => {
+            setDarkTheme(!darkTheme);
+            if (localStorage.getItem("darkMode") === "1") {
+              localStorage.setItem("darkMode", "0");
+            } else {
+              localStorage.setItem("darkMode", "1");
+            }
+          }}>
+            {
+              darkTheme ? <BsFillSunFill /> : <BsFillMoonFill />
+            }
+          </div>
         </div>
       </nav>
 

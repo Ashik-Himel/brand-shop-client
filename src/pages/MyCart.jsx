@@ -18,7 +18,7 @@ const MyCart = () => {
   }, [email])
 
   return (
-    <main className="my-12">
+    <main className="py-12 min-h-[calc(100vh-396px)]">
       <Helmet>
         <title>My Cart - Brand Shop</title>
       </Helmet>
@@ -28,7 +28,7 @@ const MyCart = () => {
           <h2 className="text-3xl font-medium text-center mb-8">My Cart</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {
-              cartProducts.map(product => <CartCard key={product[0]} slug={product[0]} quantity={product[1]} />)
+              cartProducts?.map(product => <CartCard key={product[0]} slug={product[0]} quantity={product[1]} />)
             }
           </div>
         </div>

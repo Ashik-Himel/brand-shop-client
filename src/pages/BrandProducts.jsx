@@ -10,7 +10,7 @@ const BrandProducts = () => {
   const category = useParams()?.category;
 
 return (
-    <main>
+    <main className="min-h-[calc(100vh-396px)]">
       <Helmet>
         <title>{category} - Brand Shop</title>
       </Helmet>

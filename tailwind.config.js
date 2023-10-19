@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['index.html', 'src/**/*.jsx'],
+  darkMode: 'class',
   theme: {
     container: {
       center: true,
@@ -20,6 +21,13 @@ export default {
       {
         light: {
           ...require("daisyui/src/theming/themes")["[data-theme=light]"],
+          "primary": "#ff3f34",
+          "secondary": "#1abc9c"
+        }
+      },
+      {
+        dark: {
+          ...require("daisyui/src/theming/themes")["[data-theme=dark]"],
           "primary": "#ff3f34",
           "secondary": "#1abc9c"
         }
