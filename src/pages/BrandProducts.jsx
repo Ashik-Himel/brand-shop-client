@@ -35,10 +35,12 @@ return (
               }
             </div>
           </div>
-        </section> : <div className="py-8">
-          <img className="w-32 mx-auto" src="/favicon.png" alt="Icon" />
-          <h2 className="text-3xl font-medium mt-4 text-center">No Product Found !!!</h2>
-        </div>
+        </section> : <section>
+          <div className="container py-8">
+            <img className="w-32 mx-auto" src="/favicon.png" alt="Icon" />
+            <h2 className="text-3xl font-medium mt-4 text-center">No Product Found !!!</h2>
+          </div>
+        </section>
       }
     </main>
   );

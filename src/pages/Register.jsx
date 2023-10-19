@@ -46,20 +46,7 @@ const Register = () => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
         setUser(result.user);
-        const email = result.user.email;
-        fetch(`https://brand-shop-server.vercel.app/users/${email}`, {
-          method: "PUT",
-          headers: {
-            "content-type": "application/json"
-          },
-          body: JSON.stringify({email})
-        })
-          .then(res => res.json())
-          .then(data => {
-            if (data.acknowledged) {
-              toast.success('Login Successful !!!');
-            }
-          })
+        toast.success('Login Successful !!!');
       })
       .catch(error => {
         toast.error(error.code);

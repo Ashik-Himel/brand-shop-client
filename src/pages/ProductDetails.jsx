@@ -7,43 +7,36 @@ import toast from "react-hot-toast";
 const ProductDetails = () => {
   const {name, slug, image, category, price, shortDescription} = useLoaderData();
   const [categoryImg, setCategoryImg] = useState({});
-  const [cartData, setCartData] = useState([[]]);
   const {user} = useContext(UserContext);
-  const email = user?.email;
+  const {uid, email} = user;
   const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`https://brand-shop-server.vercel.app/categories/${category}`)
       .then(res => res.json())
       .then(data => setCategoryImg(data?.image));
-    fetch(`https://brand-shop-server.vercel.app/users/${email}`)
-      .then(res => res.json())
-      .then(data => setCartData(data?.userCart || [[]]))
-  }, [category, email])
+  }, [category])
 
   const handleAddToCart = e => {
     e.preventDefault();
 
     const quantity = e.target.quantity.value;
-    if (!cartData.flat().includes(slug)) {
-      setCartData([...cartData, [slug, quantity]]);
-      const updatedCart = {email, userCart: cartData};
+    const subTotal = Number(price) * quantity;
+    const cartProduct = {uid, email, items: [[slug, quantity, subTotal]]};
+    console.log(cartProduct);
 
-      fetch(`https://brand-shop-server.vercel.app/users/${email}`, {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json"
-        },
-        body: JSON.stringify(updatedCart)
+    fetch(`https://brand-shop-server.vercel.app/usersCart/${uid}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify(cartProduct)
+    })
+      .then(res => res.json())
+      .then(() => {
+        toast.success('Product added to the cart !!!');
+        navigate('/cart');
       })
-        .then(res => res.json())
-        .then(() => {
-          toast.success('Product added to the cart !!!');
-          navigate('/cart');
-        })
-    } else {
-      toast.error("Already exist in the cart !!!");
-    }
   }
 
   return (
@@ -55,7 +48,7 @@ const ProductDetails = () => {
       <section>
         <div className="container">
           <div className="flex flex-col md:flex-row [&>*]:flex-1 justify-center items-center gap-6 bg-primary bg-opacity-10 dark:bg-secondary dark:bg-opacity-10 dark:text-white p-8 rounded-lg">
-            <div className="max-w-[500px] p-4 md:p-10 lg:p-16">
+            <div className="max-w-[500px] p-4 md:p-10">
               <img className="max-h-[400px]" src={image} alt={name} />
             </div>
             <div>
