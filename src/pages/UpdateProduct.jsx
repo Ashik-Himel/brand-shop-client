@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import toast from "react-hot-toast";
 import { useLoaderData, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
 
 const UpdateProduct = () => {
   const {name, slug: oldSlug, image, type, category, price, rating, shortDescription} = useLoaderData();
@@ -35,35 +35,15 @@ const UpdateProduct = () => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         if (data.modifiedCount === 1) {
-          toast.success('Product Updated Successfully !!!', {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
+          toast.success('Product Updated !!!');
           navigate(`/products/${slug}`)
         }
       })
       .catch(error => {
-        toast.error(error.code, {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
+        toast.error(error.code);
       })
   }
-
 
   return (
     <main className="my-12">
@@ -123,19 +103,6 @@ const UpdateProduct = () => {
           </div>
         </div>
       </section>
-
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
     </main>
   );
 };

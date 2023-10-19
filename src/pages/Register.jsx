@@ -1,13 +1,12 @@
 import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { Link } from "react-router-dom";
 import googleIcon from "../assets/images/google.png";
 import { GoogleAuthProvider, createUserWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
 import { auth } from "../firebase.config";
-import { ToastContainer, toast } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
 import { UserContext } from "../ContextProvider";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const [errorMsg, setErrorMsg] = useState('');
@@ -28,59 +27,17 @@ const Register = () => {
         updateProfile(auth.currentUser, {displayName, photoURL})
           .then(() => {
             setUser(result.user);
-            fetch(`https://brand-shop-server.vercel.app/users/${email}`, {
-              method: "PUT",
-              headers: {
-                "content-type": "application/json"
-              },
-              body: JSON.stringify({email})
-            })
-              .then(res => res.json())
-              .then(data => {
-                if (data.acknowledged) {
-                  e.target.reset();
-                  toast.success("Registration Successful !!!", {
-                    position: "top-center",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored",
-                  });
-                }
-              })
-            
+            e.target.reset();
+            toast.success('Registration Successful !!!');
           })
           .catch(error => {
-            toast.error(error.code, {
-              position: "top-center",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "colored",
-            });
-            console.error(error);
+            toast.error(error.code);
           })
       })
       .catch(error => {
         if (error.code === "auth/email-already-in-use") setErrorMsg("Already have an account with this email!")
         else {
-          toast.error(error.code, {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
-          console.error(error);
+          toast.error(error.code);
         }
       })
   }
@@ -100,31 +57,12 @@ const Register = () => {
           .then(res => res.json())
           .then(data => {
             if (data.acknowledged) {
-              toast.success("Login Successful !!!", {
-                position: "top-center",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-              });
+              toast.success('Login Successful !!!');
             }
           })
       })
       .catch(error => {
-        toast.error(error.code, {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
-        console.error(error);
+        toast.error(error.code);
       })
   }
   const handlePassValidation = e => {
@@ -202,19 +140,6 @@ const Register = () => {
           </div>
         </div>
       </section>
-
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
     </main>
   );
 };

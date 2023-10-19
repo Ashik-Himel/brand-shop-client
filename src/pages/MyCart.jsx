@@ -13,7 +13,6 @@ const MyCart = () => {
       .then(res => res.json())
       .then(data => {
         setCartProducts(data.userCart);
-        console.log(data.userCart);
       })
   }, [email])
 

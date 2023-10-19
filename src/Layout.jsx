@@ -3,6 +3,7 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer';
 import { useContext } from 'react';
 import { UserContext } from './ContextProvider';
+import { Toaster } from 'react-hot-toast';
 
 const Layout = () => {
   const {darkTheme} = useContext(UserContext);
@@ -12,6 +13,10 @@ const Layout = () => {
       <Header />
       <Outlet />
       <Footer />
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+      />
     </div>
   );
 };

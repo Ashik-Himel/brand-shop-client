@@ -1,7 +1,6 @@
+import toast from 'react-hot-toast';
 import { BsFacebook, BsInstagram, BsTwitter } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
 
 const Footer = () => {
   const handleSubscribe = e => {
@@ -19,30 +18,12 @@ const Footer = () => {
       .then(res => res.json())
       .then(data => {
         if (data.insertedId) {
-          toast.success('Subscribed Successfully !!!', {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
+          toast.success('Successfully Subscribed !!!');
           e.target.reset();
         }
       })
       .catch(error => {
-        toast.error(error.code, {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
+        toast.error(error.code);
       })
   }
 
@@ -87,18 +68,6 @@ const Footer = () => {
           <p>Copyright &copy; {new Date().getFullYear()} - Brand Shop. All rights reserved. Developed by <a className='font-bold' href="https://www.facebook.com/ashikujjaman.himel" target="_blank" rel="noopener noreferrer">Ashik-Himel</a></p>
         </div>
       </div>
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
     </footer>
   );
 };

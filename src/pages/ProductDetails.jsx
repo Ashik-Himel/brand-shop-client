@@ -2,8 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { UserContext } from "../ContextProvider";
-import { ToastContainer, toast } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
+import toast from "react-hot-toast";
 
 const ProductDetails = () => {
   const {name, slug, image, category, price, shortDescription} = useLoaderData();
@@ -39,29 +38,11 @@ const ProductDetails = () => {
       })
         .then(res => res.json())
         .then(() => {
-          toast.success('Added to cart !!!', {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
+          toast.success('Product added to the cart !!!');
           navigate('/cart');
         })
     } else {
-      toast.success('Already exist in cart !!!', {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+      toast.error("Already exist in the cart !!!");
     }
   }
 
@@ -90,19 +71,6 @@ const ProductDetails = () => {
           </div>
         </div>
       </section>
-
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
     </main>
   );
 };

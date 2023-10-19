@@ -5,9 +5,8 @@ import googleIcon from "../assets/images/google.png";
 import { Link } from "react-router-dom";
 import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth } from "../firebase.config";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { UserContext } from "../ContextProvider";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [errorMsg, setErrorMsg] = useState('');
@@ -25,31 +24,12 @@ const Login = () => {
       .then((result) => {
         setUser(result.user);
         e.target.reset();
-        toast.success("Login Successful !!!", {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
+        toast.success('Login Successful !!!');
       })
       .catch(error => {
         if (error.code === "auth/invalid-login-credentials") setErrorMsg("Incorrect Email or Password!")
         else {
-          toast.error(error.code, {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
-          console.error(error.code);
+          toast.error(error.code);
         }
       })
   }
@@ -69,31 +49,12 @@ const Login = () => {
           .then(res => res.json())
           .then(data => {
             if (data.acknowledged) {
-              toast.success("Login Successful !!!", {
-                position: "top-center",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-              });
+              toast.success('Login Successful !!!');
             }
           })
       })
       .catch(error => {
-        toast.error(error.code, {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
-        console.error(error);
+        toast.error(error.code);
       })
   }
   const handlePassValidation = e => {
@@ -156,19 +117,6 @@ const Login = () => {
           </div>
         </div>
       </section>
-
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
     </main>
   );
 };

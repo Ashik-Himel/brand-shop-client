@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet-async";
+import toast from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
 
 const AddProduct = () => {
   const categories = useLoaderData();
@@ -29,30 +28,12 @@ const AddProduct = () => {
       .then(res => res.json())
       .then(data => {
         if (data.insertedId) {
-          toast.success('Product Added Successfully !!!', {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
+          toast.success('Product Added !!!');
           e.target.reset();
         }
       })
       .catch(error => {
-        toast.error(error.code, {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
+        toast.error(error.code);
       })
   }
 
@@ -114,19 +95,6 @@ const AddProduct = () => {
           </div>
         </div>
       </section>
-
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
     </main>
   );
 };
