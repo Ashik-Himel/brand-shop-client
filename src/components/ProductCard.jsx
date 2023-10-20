@@ -11,7 +11,7 @@ const ProductCard = ({product}) => {
   }
 
   return (
-    <div className='bg-primary bg-opacity-10 dark:bg-gray-900 dark:text-white rounded-lg p-6 flex flex-col sm:flex-row justify-center items-start sm:items-center gap-6 [&>*]:flex-1'>
+    <div className='bg-primary bg-opacity-10 dark:bg-gray-800 dark:text-white rounded-lg p-6 flex flex-col sm:flex-row justify-center items-start sm:items-center gap-6 [&>*]:flex-1'>
       <div className='sm:p-6'>
         <img className='w-full max-w-[200px]' src={image} alt={name} />
       </div>

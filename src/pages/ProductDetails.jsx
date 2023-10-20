@@ -46,7 +46,7 @@ const ProductDetails = () => {
       
       <section>
         <div className="container">
-          <div className="flex flex-col md:flex-row [&>*]:flex-1 justify-center items-center gap-6 bg-primary bg-opacity-10 dark:bg-gray-900 dark:text-white p-8 rounded-lg">
+          <div className="flex flex-col md:flex-row [&>*]:flex-1 justify-center items-center gap-6 bg-primary bg-opacity-10 dark:bg-gray-800 dark:text-white p-8 rounded-lg">
             <div className="max-w-[500px] p-4 md:p-10">
               <img className="w-full max-w-[320px]" src={image} alt={name} />
             </div>

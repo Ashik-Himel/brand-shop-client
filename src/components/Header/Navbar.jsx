@@ -30,7 +30,7 @@ const Navbar = () => {
         <span className="block text-xl sm:text-3xl">Brand Shop</span>
       </Link>
 
-      <ul className="flex flex-col sm:flex-row justify-center items-center gap-6 fixed top-0 bottom-0 -right-full sm:static w-4/5 max-w-[350px] sm:w-auto sm:max-w-none bg-white dark:bg-gray-900 dark:text-white sm:bg-[transparent] dark:sm:bg-[transparent] text-black sm:text-white text-[18px] sm:text-base transition-[right] sm:transition-none [box-shadow:-10px_0px_30px_rgba(0,0,0,0.4)] sm:shadow-none z-20" style={drawerShow ? {right: '0'} : {}}>
+      <ul className="flex flex-col sm:flex-row justify-center items-center gap-6 fixed top-0 bottom-0 -right-full sm:static w-4/5 max-w-[350px] sm:w-auto sm:max-w-none bg-white dark:bg-gray-800 dark:text-white sm:bg-[transparent] dark:sm:bg-[transparent] text-black sm:text-white text-[18px] sm:text-base transition-[right] sm:transition-none [box-shadow:-10px_0px_30px_rgba(0,0,0,0.4)] sm:shadow-none z-20" style={drawerShow ? {right: '0'} : {}}>
         <FaCircleXmark className="sm:hidden absolute top-6 left-6 text-3xl text-primary cursor-pointer" onClick={() => setDrawerShow(!drawerShow)} />
         <li>
           <NavLink to='/' className={({isActive}) => isActive ? 'font-bold border-b-2 text-primary border-primary' : ''} onClick={() => setDrawerShow(!drawerShow)}>Home</NavLink>
@@ -65,8 +65,8 @@ const Navbar = () => {
           <AiOutlineMenu />
         </div>
         {
-          profileShow && <div className="bg-white text-black dark:bg-gray-900 dark:text-white text-center p-4 w-[300px] absolute right-0 top-[calc(100%+15px)] rounded-lg lg:rounded-tr-none [box-shadow:0px_10px_40px_15px_rgba(0,0,0,0.4)] z-10">
-            <span className="w-4 h-4 bg-white dark:bg-gray-900 absolute -top-2 right-[70px] sm:right-[12px] lg:right-[3px] rotate-45"></span>
+          profileShow && <div className="bg-white text-black dark:bg-gray-800 dark:text-white text-center p-4 w-[300px] absolute right-0 top-[calc(100%+15px)] rounded-lg lg:rounded-tr-none [box-shadow:0px_10px_40px_15px_rgba(0,0,0,0.4)] z-10">
+            <span className="w-4 h-4 bg-white dark:bg-gray-800 absolute -top-2 right-[70px] sm:right-[12px] lg:right-[3px] rotate-45"></span>
             <img className="w-20 mx-auto rounded-full mb-2" src={user?.photoURL} alt="User" />
             <h4 className="text-[18px] font-medium">{user?.displayName}</h4>
             <span className="text-gray-500 dark:text-gray-300 mb-4 block">{user?.email}</span>

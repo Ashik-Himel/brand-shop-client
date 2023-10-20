@@ -12,7 +12,7 @@ const HomeCard = ({product}) => {
   }
 
   return (
-    <div className='bg-primary bg-opacity-10 dark:bg-gray-900 dark:text-white p-6 rounded-lg'>
+    <div className='bg-primary bg-opacity-10 dark:bg-gray-800 dark:text-white p-6 rounded-lg'>
       <div className='mb-6'>
         <img className='w-full max-w-[200px]' src={image} alt={name} />
       </div>
