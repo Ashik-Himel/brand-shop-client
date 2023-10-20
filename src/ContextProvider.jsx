@@ -9,6 +9,7 @@ const ContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loadedUser, setLoadedUser] = useState(false);
   const [darkTheme, setDarkTheme] = useState(false);
+  const [prevPath, setPrevPath] = useState(null);
 
   useEffect(() => {
     if (localStorage.getItem('darkMode') === "1") {
@@ -29,7 +30,9 @@ const ContextProvider = ({ children }) => {
     setUser,
     loadedUser,
     darkTheme,
-    setDarkTheme
+    setDarkTheme,
+    prevPath,
+    setPrevPath
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

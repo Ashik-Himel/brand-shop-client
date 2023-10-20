@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import googleIcon from "../assets/images/google.png";
@@ -12,7 +12,9 @@ const Register = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const [showPass, setShowPass] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(true);
-  const {setUser} = useContext(UserContext);
+  const {setUser, setPrevPath} = useContext(UserContext);
+  const prevState = useLocation().state;
+  setPrevPath(prevState?.prevPath);
 
   const handleRegister = e => {
     e.preventDefault();
@@ -113,7 +115,7 @@ const Register = () => {
               <input className="btn btn-primary btn-block mt-4 dark:disabled:bg-primary dark:disabled:text-white dark:disabled:bg-opacity-20" type="submit" value="Register" disabled={submitDisabled ? 'disabled' : ''} />
             </form>
 
-            <p className="font-medium mt-4">Already have an account? <Link to='/login' className="text-primary" onClick={() => scrollTo(0, 0)}>Login</Link> here.</p>
+            <p className="font-medium mt-4">Already have an account? <Link to='/login' state={{prevPath: prevState?.prevPath}} className="text-primary" onClick={() => scrollTo(0, 0)}>Login</Link> here.</p>
 
             <div className="flex justify-stretch items-center gap-6 my-6 w-4/5 mx-auto">
               <span className="h-[2px] bg-black flex-1"></span>

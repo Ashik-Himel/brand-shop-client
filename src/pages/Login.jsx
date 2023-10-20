@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import googleIcon from "../assets/images/google.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth } from "../firebase.config";
 import { UserContext } from "../ContextProvider";
@@ -12,7 +12,9 @@ const Login = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const [showPass, setShowPass] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(true);
-  const {setUser} = useContext(UserContext);
+  const {setUser, setPrevPath} = useContext(UserContext);
+  const prevState = useLocation().state;
+  setPrevPath(prevState?.prevPath);
 
   const handleLogIn = e => {
     e.preventDefault();
@@ -90,7 +92,7 @@ const Login = () => {
               <input className="btn btn-primary btn-block mt-4 dark:disabled:bg-primary dark:disabled:text-white dark:disabled:bg-opacity-20" type="submit" value="Login" disabled={submitDisabled ? 'disabled' : ''} />
             </form>
 
-            <p className="font-medium mt-4">Don&apos;t have an account? <Link to='/register' className="text-primary" onClick={() => scrollTo(0, 0)}>Register</Link> here.</p>
+            <p className="font-medium mt-4">Don&apos;t have an account? <Link to='/register' state={{prevPath: prevState?.prevPath}} className="text-primary" onClick={() => scrollTo(0, 0)}>Register</Link> here.</p>
 
             <div className="flex justify-stretch items-center gap-6 my-6 w-4/5 mx-auto">
               <span className="h-[2px] bg-black flex-1"></span>

@@ -4,10 +4,11 @@ import { UserContext } from '../ContextProvider';
 import { Navigate } from 'react-router-dom';
 
 const PrivateRouteAlt = ({children}) => {
-  const {loadedUser, user} = useContext(UserContext);
+  const {loadedUser, user, prevPath} = useContext(UserContext);
 
   if (loadedUser) {
     if (!user) return children;
+    else if (prevPath) return <Navigate to={prevPath} />
     else return <Navigate to='/' />
   }
   else return <div className="text-center py-8 text-primary">
