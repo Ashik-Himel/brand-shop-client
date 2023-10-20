@@ -19,7 +19,7 @@ return (
         banners && <section>
           <swiper-container autoplay loop speed="500" navigation pagination>
             {
-              banners?.map(banner => <swiper-slide key={banner}><img className="w-full max-h-[500px]" src={banner} alt="Banner" /></swiper-slide>)
+              banners?.map(banner => <swiper-slide key={banner}><img className="w-full max-h-[450px]" src={banner} alt="Banner" /></swiper-slide>)
             }
           </swiper-container>
         </section>
