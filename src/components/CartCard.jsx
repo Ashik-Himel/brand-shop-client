@@ -38,7 +38,7 @@ const CartCard = ({product, cartProducts, setCartProducts}) => {
   return (
     <div className="bg-primary bg-opacity-10 dark:bg-gray-900 dark:text-white p-6 rounded-lg flex [&>*]:flex-1 flex-col sm:flex-row justify-center items-start sm:items-center gap-6">
       <div>
-        <img className="max-w-[200px] mx-auto" src={image} alt="Product Image" />
+        <img className="w-full max-w-[200px] mx-auto" src={image} alt="Product Image" />
       </div>
       <div>
         <h4 className="text-3xl font-medium mb-2">{name}</h4>

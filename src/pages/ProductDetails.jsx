@@ -48,10 +48,10 @@ const ProductDetails = () => {
         <div className="container">
           <div className="flex flex-col md:flex-row [&>*]:flex-1 justify-center items-center gap-6 bg-primary bg-opacity-10 dark:bg-gray-900 dark:text-white p-8 rounded-lg">
             <div className="max-w-[500px] p-4 md:p-10">
-              <img className="max-h-[400px]" src={image} alt={name} />
+              <img className="w-full max-w-[320px]" src={image} alt={name} />
             </div>
             <div>
-              <img className="max-h-10 mb-4" src={categoryImg} alt="Category Image" />
+              <img className="mb-4 h-full max-h-[50px]" src={categoryImg} alt="Category Image" />
               <h2 className="text-3xl font-medium mb-1">{name}</h2>
               <span className="text-xl block mb-6">&#2547; {Number(price).toLocaleString()} Taka</span>
               <p className="text-gray-500 dark:text-gray-300 mb-8">{shortDescription}</p>

@@ -14,7 +14,7 @@ const HomeCard = ({product}) => {
   return (
     <div className='bg-primary bg-opacity-10 dark:bg-gray-900 dark:text-white p-6 rounded-lg'>
       <div className='mb-6'>
-        <img className='max-h-[200px]' src={image} alt={name} />
+        <img className='w-full max-w-[200px]' src={image} alt={name} />
       </div>
       <h2 className='text-2xl mb-2'>{name}</h2>
       <div className='flex gap-1 text-orange-500 mb-2'>
