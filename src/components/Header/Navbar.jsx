@@ -65,7 +65,7 @@ const Navbar = () => {
           <AiOutlineMenu />
         </div>
         {
-          profileShow && <div className="bg-white text-black dark:bg-gray-800 dark:text-white text-center p-4 w-[300px] absolute right-0 top-[calc(100%+15px)] rounded-lg lg:rounded-tr-none z-10">
+          profileShow && <div className="bg-white text-black dark:bg-gray-800 dark:text-white text-center p-4 w-[300px] absolute right-0 top-[calc(100%+15px)] rounded-lg lg:rounded-tr-none [box-shadow:0px_10px_40px_15px_rgba(0,0,0,0.4)] z-10">
             <span className="w-4 h-4 bg-white dark:bg-gray-800 absolute -top-2 right-[70px] sm:right-[12px] lg:right-[3px] rotate-45"></span>
             <img className="w-20 mx-auto rounded-full mb-2" src={user?.photoURL} alt="User" />
             <h4 className="text-[18px] font-medium">{user?.displayName}</h4>
