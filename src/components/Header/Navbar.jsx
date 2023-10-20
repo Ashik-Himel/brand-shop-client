@@ -30,7 +30,7 @@ const Navbar = () => {
         <span className="block text-xl sm:text-3xl">Brand Shop</span>
       </Link>
 
-      <ul className="flex flex-col sm:flex-row justify-center items-center gap-6 fixed top-0 bottom-0 -right-full sm:static w-4/5 max-w-[350px] sm:w-auto sm:max-w-none bg-white sm:bg-[transparent] text-black sm:text-white text-[18px] sm:text-base transition-[right] sm:transition-none z-10" style={drawerShow ? {right: '0'} : {}}>
+      <ul className="flex flex-col sm:flex-row justify-center items-center gap-6 fixed top-0 bottom-0 -right-full sm:static w-4/5 max-w-[350px] sm:w-auto sm:max-w-none bg-white dark:bg-gray-800 dark:text-white sm:bg-[transparent] dark:sm:bg-[transparent] text-black sm:text-white text-[18px] sm:text-base transition-[right] sm:transition-none [box-shadow:-10px_0px_30px_rgba(0,0,0,0.4)] sm:shadow-none z-20" style={drawerShow ? {right: '0'} : {}}>
         <FaCircleXmark className="sm:hidden absolute top-6 left-6 text-3xl text-primary cursor-pointer" onClick={() => setDrawerShow(!drawerShow)} />
         <li>
           <NavLink to='/' className={({isActive}) => isActive ? 'font-bold border-b-2 text-primary border-primary' : ''} onClick={() => setDrawerShow(!drawerShow)}>Home</NavLink>
@@ -43,6 +43,18 @@ const Navbar = () => {
         </li>
       </ul>
       <div className="flex items-center gap-4 relative">
+        <div className="select-none text-2xl text-primary cursor-pointer" onClick={() => {
+            setDarkTheme(!darkTheme);
+            if (localStorage.getItem("darkMode") === "1") {
+              localStorage.setItem("darkMode", "0");
+            } else {
+              localStorage.setItem("darkMode", "1");
+            }
+          }}>
+            {
+              darkTheme ? <BsFillSunFill /> : <BsFillMoonFill />
+            }
+          </div>
         {
           loadedUser ? user ? <div className="flex justify-center items-center gap-4 cursor-pointer select-none" onClick={() => setProfileShow(!profileShow)}>
             <img className="w-10 rounded-full" src={user?.photoURL} alt="User" />
@@ -53,7 +65,7 @@ const Navbar = () => {
           <AiOutlineMenu />
         </div>
         {
-          profileShow && <div className="bg-white text-black text-center p-4 w-[300px] absolute right-0 top-[calc(100%+15px)] rounded-lg lg:rounded-tr-none">
+          profileShow && <div className="bg-white text-black text-center p-4 w-[300px] absolute right-0 top-[calc(100%+15px)] rounded-lg lg:rounded-tr-none z-10">
             <span className="w-4 h-4 bg-white absolute -top-2 right-[70px] sm:right-[12px] lg:right-[3px] rotate-45"></span>
             <img className="w-20 mx-auto rounded-full mb-2" src={user?.photoURL} alt="User" />
             <h4 className="text-[18px] font-medium">{user?.displayName}</h4>
@@ -64,18 +76,6 @@ const Navbar = () => {
             }}>Logout</button>
           </div>
         }
-        <div className="select-none text-2xl text-primary cursor-pointer" onClick={() => {
-          setDarkTheme(!darkTheme);
-          if (localStorage.getItem("darkMode") === "1") {
-            localStorage.setItem("darkMode", "0");
-          } else {
-            localStorage.setItem("darkMode", "1");
-          }
-        }}>
-          {
-            darkTheme ? <BsFillSunFill /> : <BsFillMoonFill />
-          }
-        </div>
       </div>
     </nav>
   );

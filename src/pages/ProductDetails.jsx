@@ -20,10 +20,9 @@ const ProductDetails = () => {
   const handleAddToCart = e => {
     e.preventDefault();
 
-    const quantity = e.target.quantity.value;
+    const quantity = Number(e.target.quantity.value);
     const subTotal = Number(price) * quantity;
     const cartProduct = {uid, email, items: [[slug, quantity, subTotal]]};
-    console.log(cartProduct);
 
     fetch(`https://brand-shop-server.vercel.app/usersCart/${uid}`, {
       method: "PUT",

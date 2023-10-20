@@ -12,7 +12,6 @@ const MyCart = () => {
       .then(res => res.json())
       .then(data => setCartProducts(data))
   }, [user]);
-  console.log(cartProducts);
 
   return (
     <main className="py-12 min-h-[calc(100vh-396px)]">

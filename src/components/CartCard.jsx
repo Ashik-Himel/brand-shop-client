@@ -10,7 +10,7 @@ const CartCard = ({product, cartProducts, setCartProducts}) => {
   const handleProductRemove = () => {
     Swal.fire({
       title: 'Warning !!!',
-      text: "Are you sure to delete this?",
+      text: "Are you sure to remove this product?",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
