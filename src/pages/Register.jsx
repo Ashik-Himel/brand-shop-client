@@ -71,6 +71,9 @@ const Register = () => {
     setErrorMsg("");
     setSubmitDisabled(false)
   }
+  const handleEmailChange = () => {
+    setErrorMsg("");
+  }
 
   return (
     <main className="my-12">
@@ -96,7 +99,7 @@ const Register = () => {
               <div className="flex flex-col md:flex-row justify-center items-center gap-4 mb-4">
                 <div className="w-full">
                   <label className="block font-medium mb-2" htmlFor="email">Email Address</label>
-                  <input className="input border-gray-300 w-full" type="email" name="email" id="email" placeholder="Enter email address" required />
+                  <input className="input border-gray-300 w-full" onChange={handleEmailChange} type="email" name="email" id="email" placeholder="Enter email address" required />
                 </div>
                 <div className="w-full">
                   <label className="block font-medium mb-2" htmlFor="password">Password</label>
