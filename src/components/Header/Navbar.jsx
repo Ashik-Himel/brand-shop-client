@@ -65,11 +65,11 @@ const Navbar = () => {
           <AiOutlineMenu />
         </div>
         {
-          profileShow && <div className="bg-white text-black text-center p-4 w-[300px] absolute right-0 top-[calc(100%+15px)] rounded-lg lg:rounded-tr-none z-10">
-            <span className="w-4 h-4 bg-white absolute -top-2 right-[70px] sm:right-[12px] lg:right-[3px] rotate-45"></span>
+          profileShow && <div className="bg-white text-black dark:bg-gray-800 dark:text-white text-center p-4 w-[300px] absolute right-0 top-[calc(100%+15px)] rounded-lg lg:rounded-tr-none z-10">
+            <span className="w-4 h-4 bg-white dark:bg-gray-800 absolute -top-2 right-[70px] sm:right-[12px] lg:right-[3px] rotate-45"></span>
             <img className="w-20 mx-auto rounded-full mb-2" src={user?.photoURL} alt="User" />
             <h4 className="text-[18px] font-medium">{user?.displayName}</h4>
-            <span className="text-gray-500 mb-4 block">{user?.email}</span>
+            <span className="text-gray-500 dark:text-gray-300 mb-4 block">{user?.email}</span>
             <button className="btn btn-warning" onClick={() => {
               setProfileShow(!profileShow);
               handleLogout();
