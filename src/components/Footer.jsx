@@ -1,20 +1,14 @@
 import toast from 'react-hot-toast';
 import { BsFacebook, BsInstagram, BsTwitter } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import { axiosInstance } from '../hooks/useAxios';
 
 const Footer = () => {
   const handleSubscribe = e => {
     e.preventDefault();
 
     const subscriber = e.target.subscribe.value;
-    fetch(`https://brand-shop-server.vercel.app/subscribers/${subscriber}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json"
-      },
-      body: JSON.stringify({subscriber})
-    })
-      .then(res => res.json())
+    axiosInstance.put(`/subscribers/${subscriber}`, subscriber)
       .then(() => {
         toast.success('Successfully Subscribed !!!');
           e.target.reset();

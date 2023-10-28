@@ -5,12 +5,18 @@ import { HelmetProvider } from 'react-helmet-async'
 import { router } from './Router.jsx'
 import './index.css'
 import ContextProvider from './ContextProvider.jsx'
+import {QueryClientProvider, QueryClient} from '@tanstack/react-query';
+import {ReactQueryDevtools} from '@tanstack/react-query-devtools';
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ContextProvider>
       <HelmetProvider>
-        <RouterProvider router={router} />
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+          <ReactQueryDevtools initialIsOpen="false" />
+        </QueryClientProvider>
       </HelmetProvider>
     </ContextProvider>
   </React.StrictMode>,

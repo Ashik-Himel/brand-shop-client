@@ -1,9 +1,10 @@
+import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
-import { useLoaderData } from "react-router-dom";
+import {axiosInstance} from '../hooks/useAxios';
 
 const AddProduct = () => {
-  const categories = useLoaderData();
+  const {data} = useQuery({queryKey: ["categories"], queryFn: () => axiosInstance('/categories')})
 
   const handleAdd = e => {
     e.preventDefault();
@@ -18,23 +19,16 @@ const AddProduct = () => {
     const shortDescription = e.target['short-description'].value;
     const newProduct = {name, slug, image, type, category, price, rating, shortDescription};
 
-    fetch('https://brand-shop-server.vercel.app/products', {
-      method: "POST",
-      headers: {
-        "content-type": "application/json"
-      },
-      body: JSON.stringify(newProduct)
+    axiosInstance.post('/products', newProduct)
+    .then(data => {
+      if (data.data.insertedId) {
+        toast.success('Product Added !!!');
+        e.target.reset();
+      }
     })
-      .then(res => res.json())
-      .then(data => {
-        if (data.insertedId) {
-          toast.success('Product Added !!!');
-          e.target.reset();
-        }
-      })
-      .catch(error => {
-        toast.error(error.code);
-      })
+    .catch(error => {
+      toast.error(error.code);
+    })
   }
 
   return (
@@ -71,7 +65,7 @@ const AddProduct = () => {
                   <label className="block font-medium mb-2" htmlFor="category">Brand Name</label>
                   <select className="select w-full border-gray-300" name="category" id="category" required>
                     {
-                      categories.map(category => <option key={category._id} value={category?.name}>{category?.name}</option>)
+                      data?.data?.map(category => <option key={category?.name} value={category?.name}>{category?.name}</option>)
                     }
                   </select>
                 </div>

@@ -24,8 +24,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/add',
-        element: <PrivateRoute><AddProduct /></PrivateRoute>,
-        loader: () => fetch("https://brand-shop-server.vercel.app/categories")
+        element: <PrivateRoute><AddProduct /></PrivateRoute>
       },
       {
         path: '/cart',
@@ -41,30 +40,15 @@ export const router = createBrowserRouter([
       },
       {
         path: '/products/categories/:category',
-        element: <BrandProducts />,
-        loader: async({params}) => {
-          let products, banners;
-          try {
-            const res = await fetch(`https://brand-shop-server.vercel.app/products/categories/${params.category}`);
-            products = await res.json();
-            const res2 = await fetch(`https://brand-shop-server.vercel.app/banners/${params.category}`);
-            banners = await res2.json();
-          }
-          catch(error) {
-            console.error(error);
-          }
-          return {products, banners};
-        }
+        element: <BrandProducts />
       },
       {
         path: '/products/:slug',
-        element: <PrivateRoute><ProductDetails /></PrivateRoute>,
-        loader: ({params}) => fetch(`https://brand-shop-server.vercel.app/products/${params.slug}`)
+        element: <PrivateRoute><ProductDetails /></PrivateRoute>
       },
       {
         path: '/update/:slug',
-        element: <PrivateRoute><UpdateProduct /></PrivateRoute>,
-        loader: ({params}) => fetch(`https://brand-shop-server.vercel.app/products/${params.slug}`)
+        element: <PrivateRoute><UpdateProduct /></PrivateRoute>
       }
     ]
   }

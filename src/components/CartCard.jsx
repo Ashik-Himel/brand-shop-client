@@ -2,8 +2,9 @@ import PropTypes from 'prop-types';
 import { useContext } from 'react';
 import Swal from 'sweetalert2';
 import { UserContext } from '../ContextProvider';
+import { axiosInstance } from '../hooks/useAxios';
 
-const CartCard = ({product, cartProducts, setCartProducts}) => {
+const CartCard = ({product, refetch}) => {
   const {user} = useContext(UserContext);
   const {name, slug, image, quantity, subTotal} = product;
 
@@ -18,13 +19,9 @@ const CartCard = ({product, cartProducts, setCartProducts}) => {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://brand-shop-server.vercel.app/usersCart/${user?.uid}/${slug}`, {
-          method: "DELETE"
-        })
-          .then(res => res.json())
+        axiosInstance.delete(`usersCart/${user?.uid}/${slug}`)
           .then(() => {
-            const newCartProducts = cartProducts.filter(item => item._id !== product._id);
-            setCartProducts(newCartProducts);
+            refetch();
             Swal.fire(
               'Removed !!!',
               'Product has been removed from the cart!',
@@ -56,6 +53,5 @@ export default CartCard;
 
 CartCard.propTypes = {
   product: PropTypes.object,
-  cartProducts: PropTypes.array,
-  setCartProducts: PropTypes.func
+  refetch: PropTypes.func
 }

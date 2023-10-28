@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
 import HomeCard from "./HomeCard";
 import PropTypes from 'prop-types';
+import { axiosInstance } from "../hooks/useAxios";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "./Loading";
 
 const HomeCardsSection = ({type}) => {
-  const [products, setProducts] = useState([]);
-  useEffect(() => {
-    fetch(`https://brand-shop-server.vercel.app/products/types/${type}`)
-      .then((res) => res.json())
-      .then((data) => setProducts(data.slice(0, 4)));
-  }, [type]);
+  const {data: products, isLoading} = useQuery({queryKey: ["products", type], queryFn: () => axiosInstance(`/products/types/${type}`)});
+
+  if (isLoading) return <Loading />;
 
   return (
     <section className="mt-12">
@@ -17,8 +16,8 @@ const HomeCardsSection = ({type}) => {
           {type}s
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {products?.map((product) => (
-            <HomeCard key={product._id} product={product} />
+          {products?.data?.map((product) => (
+            <HomeCard key={product.slug} product={product} />
           ))}
         </div>
       </div>
