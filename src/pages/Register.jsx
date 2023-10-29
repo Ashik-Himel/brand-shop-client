@@ -7,6 +7,7 @@ import { GoogleAuthProvider, createUserWithEmailAndPassword, signInWithPopup, up
 import { auth } from "../firebase.config";
 import { UserContext } from "../ContextProvider";
 import toast from "react-hot-toast";
+import { axiosInstance } from "../hooks/useAxios";
 
 const Register = () => {
   const [errorMsg, setErrorMsg] = useState('');
@@ -28,6 +29,7 @@ const Register = () => {
       .then(result => {
         updateProfile(auth.currentUser, {displayName, photoURL})
           .then(() => {
+            axiosInstance.post('/login', {email: result.user?.email});
             setUser(result.user);
             e.target.reset();
             toast.success('Registration Successful !!!');
@@ -47,6 +49,7 @@ const Register = () => {
     const googleProvider = new GoogleAuthProvider();
     signInWithPopup(auth, googleProvider)
       .then((result) => {
+        axiosInstance.post('/login', {email: result.user?.email});
         setUser(result.user);
         toast.success('Login Successful !!!');
       })
