@@ -29,7 +29,7 @@ const Register = () => {
       .then(result => {
         updateProfile(auth.currentUser, {displayName, photoURL})
           .then(() => {
-            axiosInstance.post('/login', {email: result.user?.email});
+            axiosInstance.post('/login', {email: result?.user?.email});
             setUser(result.user);
             e.target.reset();
             toast.success('Registration Successful !!!');
@@ -49,7 +49,7 @@ const Register = () => {
     const googleProvider = new GoogleAuthProvider();
     signInWithPopup(auth, googleProvider)
       .then((result) => {
-        axiosInstance.post('/login', {email: result.user?.email});
+        axiosInstance.post('/login', {email: result?.user?.email});
         setUser(result.user);
         toast.success('Login Successful !!!');
       })
