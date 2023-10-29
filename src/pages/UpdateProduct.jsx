@@ -3,10 +3,13 @@ import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { axiosInstance } from "../hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
+import { useContext } from "react";
+import { UserContext } from "../ContextProvider";
 
 const UpdateProduct = () => {
+  const {user} = useContext(UserContext);
   const {slug: oldSlug} = useParams()
-  const {data: product} = useQuery({queryKey: ["updateProduct", oldSlug], queryFn: () => axiosInstance(`/products/${oldSlug}`)});
+  const {data: product} = useQuery({queryKey: ["updateProduct", oldSlug], queryFn: () => axiosInstance(`/products/${oldSlug}`, {headers: {Authorization: user?.email}})});
   const {data: categories} = useQuery({queryKey: ["categories"], queryFn: () => axiosInstance('/categories')});
   const navigate = useNavigate();
 
@@ -23,7 +26,7 @@ const UpdateProduct = () => {
     const shortDescription = e.target['short-description'].value;
     const updateProduct = {name, slug, image, type, category, price, rating, shortDescription};
 
-    axiosInstance.put(`/products/${oldSlug}`, updateProduct)
+    axiosInstance.put(`/products/${oldSlug}`, updateProduct, {headers: {Authorization: user?.email}})
       .then(data => {
         if (data.data.modifiedCount === 1) {
           toast.success('Product Updated !!!');

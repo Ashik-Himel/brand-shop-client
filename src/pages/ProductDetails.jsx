@@ -8,11 +8,11 @@ import { useQuery } from "@tanstack/react-query";
 import Loading from "../components/Loading";
 
 const ProductDetails = () => {
-  const {slug} = useParams();
-  const {data : product, isLoading} = useQuery({queryKey: [slug], queryFn: () => axiosInstance(`/products/${slug}`)});
-  const {data : category, isLoading: isLoading2} = useQuery({queryKey: ["category", product?.data.category], queryFn: () => axiosInstance(`/categories/${product?.data.category}`)});
   const {user} = useContext(UserContext);
   const {uid, email} = user;
+  const {slug} = useParams();
+  const {data : product, isLoading} = useQuery({queryKey: [slug], queryFn: () => axiosInstance(`/products/${slug}`, {headers: {Authorization: email}})});
+  const {data : category, isLoading: isLoading2} = useQuery({queryKey: ["category", product?.data.category], queryFn: () => axiosInstance(`/categories/${product?.data.category}`)});
   const navigate = useNavigate();
 
   if (isLoading || isLoading2) return <Loading />;
@@ -24,7 +24,7 @@ const ProductDetails = () => {
     const subTotal = Number(product?.data?.price) * quantity;
     const cartProduct = {uid, email, items: [[slug, quantity, subTotal]]};
 
-    axiosInstance.put(`/usersCart/${uid}`, cartProduct)
+    axiosInstance.put(`/usersCart/${uid}`, cartProduct, {headers: {Authorization: email}})
       .then(() => {
         toast.success('Product added to the cart !!!');
         scrollTo(0, 0);

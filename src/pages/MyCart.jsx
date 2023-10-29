@@ -8,7 +8,7 @@ import Loading from "../components/Loading";
 
 const MyCart = () => {
   const {user} = useContext(UserContext);
-  const {data: cartProducts, isLoading, refetch} = useQuery({queryKey: ['cart-items', user?.uid], queryFn: () => axiosInstance(`usersCart/${user?.uid}`)});
+  const {data: cartProducts, isLoading, refetch} = useQuery({queryKey: ['cart-items', user?.uid], queryFn: () => axiosInstance(`usersCart/${user?.uid}`, {headers: {Authorization: user?.email}})});
 
   if (isLoading) return <Loading />
 

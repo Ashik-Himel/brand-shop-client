@@ -7,6 +7,7 @@ import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 
 import { auth } from "../firebase.config";
 import { UserContext } from "../ContextProvider";
 import toast from "react-hot-toast";
+import { axiosInstance } from "../hooks/useAxios";
 
 const Login = () => {
   const [errorMsg, setErrorMsg] = useState('');
@@ -24,6 +25,7 @@ const Login = () => {
 
     signInWithEmailAndPassword(auth, email, password)
       .then((result) => {
+        axiosInstance.post('/login', {email});
         setUser(result.user);
         e.target.reset();
         toast.success('Login Successful !!!');

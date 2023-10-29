@@ -2,8 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 import {axiosInstance} from '../hooks/useAxios';
+import { useContext } from "react";
+import { UserContext } from "../ContextProvider";
 
 const AddProduct = () => {
+  const {user} = useContext(UserContext);
   const {data} = useQuery({queryKey: ["categories"], queryFn: () => axiosInstance('/categories')})
 
   const handleAdd = e => {
@@ -19,7 +22,7 @@ const AddProduct = () => {
     const shortDescription = e.target['short-description'].value;
     const newProduct = {name, slug, image, type, category, price, rating, shortDescription};
 
-    axiosInstance.post('/products', newProduct)
+    axiosInstance.post('/products', newProduct, {headers: {Authorization: user?.email}})
     .then(data => {
       if (data.data.insertedId) {
         toast.success('Product Added !!!');
