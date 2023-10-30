@@ -8,7 +8,7 @@ import Loading from "../components/Loading";
 
 const MyCart = () => {
   const {user} = useContext(UserContext);
-  const {data: cartProducts, isLoading, refetch} = useQuery({queryKey: ['cart-items', user?.uid], queryFn: () => axiosInstance(`usersCart/${user?.uid}`, {headers: {Authorization: user?.email}})});
+  const {data: cartProducts, isLoading, refetch} = useQuery({queryKey: ['cart-items', user?.uid], queryFn: () => axiosInstance(`usersCart/${user?.uid}`, {headers: {Authorization: `Bearer ${user?.email}`}})});
 
   if (isLoading) return <Loading />
 
@@ -24,7 +24,7 @@ const MyCart = () => {
             <h2 className="text-3xl font-medium text-center mb-8 dark:text-white">My Cart</h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {
-                cartProducts.data.map(product => <CartCard key={product.slug} product={product} refetch={refetch} />)
+                cartProducts.data?.map(product => <CartCard key={product.slug} product={product} refetch={refetch} />)
               }
             </div>
           </div>

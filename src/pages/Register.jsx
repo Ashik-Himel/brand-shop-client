@@ -15,7 +15,7 @@ const Register = () => {
   const [submitDisabled, setSubmitDisabled] = useState(true);
   const {setUser, setPrevPath} = useContext(UserContext);
   const prevState = useLocation().state;
-  setPrevPath(prevState?.prevPath);
+  setPrevPath(prevState?.prevPath || '');
 
   const handleRegister = e => {
     e.preventDefault();
@@ -29,7 +29,8 @@ const Register = () => {
       .then(result => {
         updateProfile(auth.currentUser, {displayName, photoURL})
           .then(() => {
-            axiosInstance.post('/login', {email: result?.user?.email});
+            axiosInstance.post('/login', {email: result?.user?.email})
+              .then(res => console.log(res.data));
             setUser(result.user);
             e.target.reset();
             toast.success('Registration Successful !!!');
@@ -49,7 +50,8 @@ const Register = () => {
     const googleProvider = new GoogleAuthProvider();
     signInWithPopup(auth, googleProvider)
       .then((result) => {
-        axiosInstance.post('/login', {email: result?.user?.email});
+        axiosInstance.post('/login', {email: result?.user?.email})
+          .then(res => console.log(res.data));
         setUser(result.user);
         toast.success('Login Successful !!!');
       })

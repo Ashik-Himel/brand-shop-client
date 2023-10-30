@@ -22,7 +22,7 @@ const AddProduct = () => {
     const shortDescription = e.target['short-description'].value;
     const newProduct = {name, slug, image, type, category, price, rating, shortDescription};
 
-    axiosInstance.post('/products', newProduct, {headers: {Authorization: user?.email}})
+    axiosInstance.post('/products', newProduct, {headers: {Authorization: `Bearer ${user?.email}`}})
     .then(data => {
       if (data.data.insertedId) {
         toast.success('Product Added !!!');

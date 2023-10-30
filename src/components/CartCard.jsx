@@ -19,7 +19,7 @@ const CartCard = ({product, refetch}) => {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosInstance.delete(`usersCart/${user?.uid}/${slug}`, {headers: {Authorization: user?.email}})
+        axiosInstance.delete(`usersCart/${user?.uid}/${slug}`, {headers: {Authorization: `Bearer ${user?.email}`}})
           .then(() => {
             refetch();
             Swal.fire(

@@ -15,7 +15,7 @@ const Login = () => {
   const [submitDisabled, setSubmitDisabled] = useState(true);
   const {setUser, setPrevPath} = useContext(UserContext);
   const prevState = useLocation().state;
-  setPrevPath(prevState?.prevPath);
+  setPrevPath(prevState?.prevPath || '');
 
   const handleLogIn = e => {
     e.preventDefault();
@@ -25,7 +25,8 @@ const Login = () => {
 
     signInWithEmailAndPassword(auth, email, password)
       .then((result) => {
-        axiosInstance.post('/login', {email});
+        axiosInstance.post('/login', {email: email})
+          .then(res => console.log(res.data));
         setUser(result.user);
         e.target.reset();
         toast.success('Login Successful !!!');
@@ -41,7 +42,8 @@ const Login = () => {
     const googleProvider = new GoogleAuthProvider();
     signInWithPopup(auth, googleProvider)
       .then((result) => {
-        axiosInstance.post('/login', {email: result?.user?.email});
+        axiosInstance.post('/login', {email: result?.user?.email})
+          .then(res => console.log(res.data));
         setUser(result.user);
         toast.success('Login Successful !!!');
       })

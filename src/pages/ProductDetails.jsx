@@ -11,7 +11,7 @@ const ProductDetails = () => {
   const {user} = useContext(UserContext);
   const {uid, email} = user;
   const {slug} = useParams();
-  const {data : product, isLoading} = useQuery({queryKey: [slug], queryFn: () => axiosInstance(`/products/${slug}`, {headers: {Authorization: email}})});
+  const {data : product, isLoading} = useQuery({queryKey: [slug], queryFn: () => axiosInstance(`/products/${slug}`, {headers: {Authorization: `Bearer ${email}`}})});
   const {data : category, isLoading: isLoading2} = useQuery({queryKey: ["category", product?.data.category], queryFn: () => axiosInstance(`/categories/${product?.data.category}`)});
   const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ const ProductDetails = () => {
     const subTotal = Number(product?.data?.price) * quantity;
     const cartProduct = {uid, email, items: [[slug, quantity, subTotal]]};
 
-    axiosInstance.put(`/usersCart/${uid}`, cartProduct, {headers: {Authorization: email}})
+    axiosInstance.put(`/usersCart/${uid}`, cartProduct, {headers: {Authorization: `Bearer ${email}`}})
       .then(() => {
         toast.success('Product added to the cart !!!');
         scrollTo(0, 0);
@@ -35,7 +35,7 @@ const ProductDetails = () => {
   return (
     <main className="py-12">
       <Helmet>
-        <title>{product?.data?.name} - Brand Shop</title>
+        <title>Product Details - Brand Shop</title>
       </Helmet>
       
       <section>

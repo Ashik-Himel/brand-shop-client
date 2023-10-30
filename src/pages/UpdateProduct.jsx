@@ -9,7 +9,7 @@ import { UserContext } from "../ContextProvider";
 const UpdateProduct = () => {
   const {user} = useContext(UserContext);
   const {slug: oldSlug} = useParams()
-  const {data: product} = useQuery({queryKey: ["updateProduct", oldSlug], queryFn: () => axiosInstance(`/products/${oldSlug}`, {headers: {Authorization: user?.email}})});
+  const {data: product} = useQuery({queryKey: ["updateProduct", oldSlug], queryFn: () => axiosInstance(`/products/${oldSlug}`, {headers: {Authorization: `Bearer ${user?.email}`}})});
   const {data: categories} = useQuery({queryKey: ["categories"], queryFn: () => axiosInstance('/categories')});
   const navigate = useNavigate();
 
@@ -26,7 +26,7 @@ const UpdateProduct = () => {
     const shortDescription = e.target['short-description'].value;
     const updateProduct = {name, slug, image, type, category, price, rating, shortDescription};
 
-    axiosInstance.put(`/products/${oldSlug}`, updateProduct, {headers: {Authorization: user?.email}})
+    axiosInstance.put(`/products/${oldSlug}`, updateProduct, {headers: {Authorization: `Bearer ${user?.email}`}})
       .then(data => {
         if (data.data.modifiedCount === 1) {
           toast.success('Product Updated !!!');
